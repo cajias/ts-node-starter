@@ -1,0 +1,89 @@
+{
+  "name": "ts-node-starter",
+  "version": "1.0.0",
+  "description": "A starter template for creating TypeScript Node.js projects",
+  "main": "dist/index.js",
+  "repository": "https://github.com/cajias/ts-node-starter",
+  "author": "Raul Cajias <snobby_stomper_00@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@3.2.2",
+  "scripts": {
+    "test:pre": "rm -rf dist && yarn lint && tsc",
+    "test": "yarn test:pre && yarn jest",
+    "test:ci": "jest --coverage && yarn test:bump && yarn test:ci-badges",
+    "test:bump": "jest-coverage-thresholds-bumper --silent --margin 1",
+    "test:ci-badges": "coverage-badges",
+    "lint": "eslint",
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.7",
+    "@types/node": "^18.7.5",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "coverage-badges-cli": "^1.0.10",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": ">=6",
+    "jest": "^28.1.3",
+    "jest-coverage-thresholds-bumper": "^1.1.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "2.7.1",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
+  },
+  "jest": {
+    "coverageReporters": [
+      "json-summary",
+      "lcov"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "verbose": true,
+    "testMatch": [
+      "<rootDir>/**/*.test.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "overrides": [],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest"
+    },
+    "plugins": [
+      "prettier",
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,css,md,json}": "prettier --write",
+    "*.{ts}": "eslint --cache --fix"
+  }
+}
