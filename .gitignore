@@ -105,5 +105,8 @@ dist
 .tern-port
 
 .idea
+
+# Yarn Berry — keep releases/plugins, ignore caches and regenerated state
 .yarn/cache
+.yarn/install-state.gz
 tmp
